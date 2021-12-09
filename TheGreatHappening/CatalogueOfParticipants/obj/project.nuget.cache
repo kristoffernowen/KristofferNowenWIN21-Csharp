@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "g/1QwhawS0BPZy5D8wxaxIA/518+cusP673plDrRJ0NWU4AqIKIYG2iudDEBY6SKqOSbypXHHa7NmSDVKcDdGg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\krist\\OneDrive\\Documents\\KN WIN21\\C#\\TheGreatHappening\\CatalogueOfParticipants\\CatalogueOfParticipants.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\krist\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

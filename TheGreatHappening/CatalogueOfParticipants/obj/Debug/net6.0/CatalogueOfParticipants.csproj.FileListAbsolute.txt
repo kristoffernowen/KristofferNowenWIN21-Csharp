@@ -1,0 +1,17 @@
+C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\CatalogueOfParticipants\bin\Debug\net6.0\CatalogueOfParticipants.exe
+C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\CatalogueOfParticipants\bin\Debug\net6.0\CatalogueOfParticipants.deps.json
+C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\CatalogueOfParticipants\bin\Debug\net6.0\CatalogueOfParticipants.runtimeconfig.json
+C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\CatalogueOfParticipants\bin\Debug\net6.0\CatalogueOfParticipants.dll
+C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\CatalogueOfParticipants\bin\Debug\net6.0\ref\CatalogueOfParticipants.dll
+C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\CatalogueOfParticipants\bin\Debug\net6.0\CatalogueOfParticipants.pdb
+C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\CatalogueOfParticipants\obj\Debug\net6.0\CatalogueOfParticipants.csproj.AssemblyReference.cache
+C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\CatalogueOfParticipants\obj\Debug\net6.0\CatalogueOfParticipants.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\CatalogueOfParticipants\obj\Debug\net6.0\CatalogueOfParticipants.AssemblyInfoInputs.cache
+C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\CatalogueOfParticipants\obj\Debug\net6.0\CatalogueOfParticipants.AssemblyInfo.cs
+C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\CatalogueOfParticipants\obj\Debug\net6.0\CatalogueOfParticipants.csproj.CoreCompileInputs.cache
+C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\CatalogueOfParticipants\obj\Debug\net6.0\CatalogueOfParticipants.dll
+C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\CatalogueOfParticipants\obj\Debug\net6.0\ref\CatalogueOfParticipants.dll
+C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\CatalogueOfParticipants\obj\Debug\net6.0\CatalogueOfParticipants.pdb
+C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\CatalogueOfParticipants\obj\Debug\net6.0\CatalogueOfParticipants.genruntimeconfig.cache
+C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\CatalogueOfParticipants\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\CatalogueOfParticipants\obj\Debug\net6.0\CatalogueOfParticipants.csproj.CopyComplete
