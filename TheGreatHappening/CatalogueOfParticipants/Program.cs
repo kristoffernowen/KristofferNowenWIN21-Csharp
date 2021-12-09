@@ -1,16 +1,17 @@
 ﻿using CatalogueOfParticipants;
-using Newtonsoft.Json;
-using System.Text.Json;
-//using System.Text.Json.Serialization;
+
+
 
 byte menuAction;
 var continueMenu = true;
 
 var listOfParticipants = new List<Participant>();
+var managerTGH = new Participant();
 
 do
 {
     Console.WriteLine(@"
+
 Vad vill du göra?
 Välj med siffra:
 
@@ -23,6 +24,7 @@ Välj med siffra:
 7 : Läs in sparad lista
 0 : Avsluta programmet
 
+
 ");
     try
     {
@@ -32,127 +34,52 @@ Välj med siffra:
     {
         menuAction = 9;
     }
+    string path = @"C:\TheGreatHappening\TGHjson.txt";
+
     switch (menuAction)
     {
         case 1: Console.WriteLine("Anmäl deltagare");
-            CreateParticipant();
+            listOfParticipants = managerTGH.CreateParticipant(listOfParticipants);
             break;
         case 2: Console.WriteLine("Visa lista med deltagare");
-            ShowList();
+            managerTGH.ShowList(listOfParticipants);
             break;
         case 3: Console.WriteLine("Ta bort deltagare");
-            RemoveParticipantFromList();
+            listOfParticipants = managerTGH.RemoveParticipantFromList(listOfParticipants);
             break;
         case 4: Console.WriteLine("Generera rabattkod");
-            GenerateDiscountCode();
+            managerTGH.GenerateDiscountCode(listOfParticipants);
             break;
         case 5: Console.WriteLine("Spara listan till textfil");
-            WriteToTextFile();
+            managerTGH.WriteToTextFile(listOfParticipants);
             break;
         case 6: Console.WriteLine("Skriv json fil att spara");
-            WriteToTextFileAsJson();
+
+            path = managerTGH.WriteToTextFileAsJson(listOfParticipants);
             break;
         case 7: Console.WriteLine("Ladda lista");
-            ReadJsonFromTxtFile();
+            listOfParticipants = managerTGH.ReadJsonFromTxtFile(path);
             break;
         case 9: Console.WriteLine("SE TILL ATT DU SKRIVER EN SIFFRA FRÅN VALMENYN");
             break;
-        case 0: continueMenu = false;
-            Console.WriteLine("Avsluta programmet");
+        case 0:
+            Console.WriteLine("Avslutar programmet"); 
+            continueMenu = false;
+            
             break;
         default: continue;
     }
 }
 while (continueMenu == true);
 
- List<Participant> CreateParticipant()
-{
-    var participant = new Participant();
-    Console.WriteLine("Skriv förnamn på deltagaren:");
-    participant.FirstName = Console.ReadLine();
-    Console.WriteLine("Skriv efternamn på deltagaren:");
-    participant.LastName = Console.ReadLine();
-    Console.WriteLine("Skriv e-postadress till deltagaren:");
-    participant.Email = Console.ReadLine();
-    Console.WriteLine("Önskas specialkost? Skriv här:");
-    participant.SpecialRequirements = Console.ReadLine();
-
-    if (!String.IsNullOrEmpty(participant.FirstName) && !String.IsNullOrEmpty(participant.LastName) && !String.IsNullOrEmpty(participant.Email) && !String.IsNullOrEmpty(participant.SpecialRequirements))
-    {
-    listOfParticipants.Add(participant);
-    }
-    else
-    {
-        Console.WriteLine("Du måste fylla i alla fält. Deltagaren sparades inte.");
-        
-    }
-
-    return listOfParticipants;
-}
-void ShowList()
-{
-    foreach(var participant in listOfParticipants)
-        Console.WriteLine($@"Deltagare nummer: {listOfParticipants.IndexOf(participant) + 1}
-Namn: {participant.FullName}
-Epostadress: {participant.Email}
-");
-}
-List<Participant> RemoveParticipantFromList()
-{
-    Console.WriteLine("Ta bort deltagare. Välj nummer från listan.");
-    foreach (var participant in listOfParticipants)
-        Console.WriteLine($@"Deltagare nummer: {listOfParticipants.IndexOf(participant) + 1}
-Namn: {participant.FullName}
-Epostadress: {participant.Email}
-");
-    Console.WriteLine("Skriv nummer på deltagare att ta bort:");
-    listOfParticipants.Remove(listOfParticipants[Convert.ToByte(Console.ReadLine())-1]);
-
-    return listOfParticipants;
-}
-
-void GenerateDiscountCode()
-{
-    Console.WriteLine("Välj deltagare att generera rabattkod till.");
-    foreach (var participant in listOfParticipants)
-        Console.WriteLine($@"Deltagare: {listOfParticipants.IndexOf(participant) + 1}
- {participant.FullName}");
-    var a = Convert.ToByte(Console.ReadLine());
-    Console.WriteLine($"Rabattkod: {listOfParticipants[a-1].DiscountCode}");
-}
-
-void WriteToTextFile()
-{
-
-    string path = @"C:\Users\krist\OneDrive\Documents\Dagbok C#\24nov\Lektion_7\MyFolder\SubFolder\GH.txt";
-    var lines = new List<string>();
-    foreach (var participant in listOfParticipants)
-    {
-        lines.Add($"Förnamn: {participant.FirstName}");
-        lines.Add(participant.LastName);
-        lines.Add(participant.Email);
-        lines.Add(participant.SpecialRequirements);
-    }
-    File.WriteAllLines(path, lines );
-}
 
 
 
-void WriteToTextFileAsJson()
-{
-    string path = @"C:\Users\krist\OneDrive\Documents\Dagbok C#\24nov\Lektion_7\MyFolder\SubFolder\TGH.txt";
-    string json = System.Text.Json.JsonSerializer.Serialize(listOfParticipants);
-    File.WriteAllText(path, json);
-}
 
-void ReadJsonFromTxtFile()
-{
-    string path = @"C:\Users\krist\OneDrive\Documents\Dagbok C#\24nov\Lektion_7\MyFolder\SubFolder\TGH.txt";
-    using (StreamReader r = new StreamReader(path))
-    {
 
-        string json = r.ReadToEnd();
-        List<Participant> listUpdated = JsonConvert.DeserializeObject<List<Participant>>(json);
-        listOfParticipants = listUpdated.ToList();
-    }
-}
+
+
+
+
+
+
