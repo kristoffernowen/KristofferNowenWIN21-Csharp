@@ -10,7 +10,12 @@
       "ProjectGuid": "0f84ecbf-cf6d-46cb-bd28-24ea70a30101",
       "DisplayName": "ConsoleApp1",
       "ColorIndex": 1
+    },
+    "458c8a04-22bd-434c-949f-9788ce7010f3": {
+      "ProjectGuid": "458c8a04-22bd-434c-949f-9788ce7010f3",
+      "DisplayName": "TGH.WpfApp",
+      "ColorIndex": 2
     }
   },
-  "NextColorIndex": 2
+  "NextColorIndex": 3
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CatalogueOfParticipants
 {
-    internal class Participant
+    public class Participant
     {
         Random random = new Random();
         
