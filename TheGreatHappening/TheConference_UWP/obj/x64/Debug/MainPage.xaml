@@ -1,0 +1,85 @@
+﻿<Page
+    x:Class="TheConference_UWP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TheConference_UWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="Aquamarine">
+        <Grid Margin="20" Background="Aquamarine">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                       Text="The Great Happening - Conference in Utopia" FontSize="50" HorizontalAlignment="Center"/>
+            <Grid Grid.Row="1" Grid.Column="0"  Background="Azure" Margin="0 0 10 0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Skapa deltagare" FontSize="40" Margin="0 20" />
+                <StackPanel Grid.Row="1" >
+                    <TextBlock Text="Förnamn" FontSize="25" />
+                    <TextBox x:ConnectionId='9' x:Name="tboxFirstName" PlaceholderText="Förnamn" FontSize="25" />
+                    <TextBlock Text="Efternamn" FontSize="25" />
+                    <TextBox x:ConnectionId='10' x:Name="tboxLastName" PlaceholderText="Förnamn" FontSize="25" />
+                    <TextBlock Text="Email" FontSize="25" />
+                    <TextBox x:ConnectionId='11' x:Name="tboxEmail" PlaceholderText="Förnamn" FontSize="25" />
+                    <TextBlock Text="Speciella önskemål" FontSize="25" />
+                    <TextBox x:ConnectionId='12' x:Name="tboxSpecialRequirements" PlaceholderText="Speciella önskemål" FontSize="25" />
+                    <Button x:ConnectionId='13' x:Name="btnSaveParticipantToList" Content="Lägg till i deltagarlista" Margin="10 50" HorizontalAlignment="Center"                                       />
+
+                </StackPanel>
+            </Grid>
+            
+            <Grid Grid.Row="1" Grid.Column="1" Background="CadetBlue" Margin="10 0 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <StackPanel x:ConnectionId='2' x:Name="spanelListButtons" Orientation="Horizontal" >
+                    <Button x:ConnectionId='7' x:Name="btnShowList" Content="Visa Deltagarlista" FontSize="20" Margin="10"                          />
+                    <Button x:ConnectionId='8' x:Name="btnClearList" Content="Rensa Deltagarlista" FontSize="20" Margin="10"                            />
+                </StackPanel>
+                
+                <ListView x:ConnectionId='3' x:Name="lvListOfParticipants" DataContext="TheConference_UWP.Services.UwpParticipant" Grid.Row="1" >
+                    <ListView.ItemTemplate >
+                        <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Vertical" Width="800" Background="Beige">
+                            <TextBlock    Text="{Binding FullName}" FontSize="20" TextAlignment="Start"/>     
+                            <TextBlock  Text="{Binding Email}"  FontSize="20" TextAlignment="Start"/>
+                            
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Background="BlueViolet" >
+                           
+                                <Button x:ConnectionId='6' x:Name="btnDelete" HorizontalContentAlignment="Right" Grid.Column="1" FontFamily="Segoe MDL2 Assets" Content="&#xE74D;" FontSize="40"                        />
+                            </StackPanel>
+                        </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <StackPanel Grid.Row="2">
+                    <TextBlock x:ConnectionId='4' x:Name="tblockTest"></TextBlock>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
+
