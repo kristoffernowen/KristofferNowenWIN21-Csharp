@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TheConference_UWP.Services
 {
-    internal class UwpParticipant
+    internal class UwpParticipant : INotifyPropertyChanged
     {
         Random random = new Random();
 
@@ -24,6 +25,8 @@ namespace TheConference_UWP.Services
         public string DiscountCode { get; }
         public string FullName => $"{FirstName} {LastName }";
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public static UwpParticipant CreateParticipant(string firstName, string lastName, string email, string specialRequirements)
         {
             var newParticipant = new UwpParticipant();
@@ -39,6 +42,12 @@ namespace TheConference_UWP.Services
         {
             return list;
 
+        }
+        public static IEnumerable<UwpParticipant> UpdateList(List<UwpParticipant> list)
+        {
+            IEnumerable<UwpParticipant> listBack = list as IEnumerable<UwpParticipant>;
+
+            return listBack;
         }
 
         

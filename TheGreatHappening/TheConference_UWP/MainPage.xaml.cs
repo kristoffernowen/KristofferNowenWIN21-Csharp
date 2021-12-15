@@ -13,6 +13,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using TheConference_UWP.Services;
+using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -24,42 +26,64 @@ namespace TheConference_UWP
     public sealed partial class MainPage : Page
     {
         List<UwpParticipant> listOfUwpParticipants = new List<UwpParticipant>();
-        string name = "Vivo";
+        ObservableCollection<UwpParticipant> OBlista = new ObservableCollection<UwpParticipant>();
+        
+
         public MainPage()
         {
             this.InitializeComponent();
+          //  lvListOfParticipants.ItemsSource = OBlista;
             
         }
 
-        private void StateTimer()
+        private ObservableCollection<UwpParticipant> MyList
         {
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(500);
-            timer.Tick += TickAction;
-            timer.Start();
+            get
+            {
+                if (MyList == null)
+                {
+                    MyList = new ObservableCollection<UwpParticipant>();
+                }
+                return MyList;
+            }
+            set
+            {
+                MyList = value;
+            }
         }
+        
 
-        public void TickAction(object sender, object e)
+        
+        private  void ViewList(List<UwpParticipant> list)
         {
-            lvListOfParticipants.ItemsSource = listOfUwpParticipants;
+            listOfUwpParticipants = list.ToList();
+           
+            lvListOfParticipants.ItemsSource = list;
         }
         private void btnSaveParticipantToList_Click(object sender, RoutedEventArgs e)
         {
 
+
+            // OBlista
             listOfUwpParticipants.Add(UwpParticipant.CreateParticipant(tboxFirstName.Text, tboxLastName.Text, tboxEmail.Text, tboxSpecialRequirements.Text));
-            
+
+            //  listOfUwpParticipants = listOfUwpParticipants.Where(participant => participant == item).ToList();
+
+
+
+
+            ViewList(listOfUwpParticipants);
         }
 
         private void btnShowList_Click(object sender, RoutedEventArgs e)
         {
-            List<UwpParticipant> nextList = new List<UwpParticipant>();
-            nextList = listOfUwpParticipants;
+            // låser här också, den uppdaterar inte, första går bra
 
-            IEnumerable<UwpParticipant> listU = listOfUwpParticipants as IEnumerable<UwpParticipant>;
             
-            lvListOfParticipants.ItemsSource = nextList;
+            
+            
 
-            name = "måns";
+            
             
         }
 
@@ -71,16 +95,19 @@ namespace TheConference_UWP
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            IEnumerable<UwpParticipant> listU = listOfUwpParticipants as IEnumerable<UwpParticipant>;
+            
             var obj =(Button)sender;
             var item =(UwpParticipant)obj.DataContext;
             
+            //OBlista.Remove(item);
 
-            listOfUwpParticipants = listU.Where(participant => participant != item).ToList();
+            listOfUwpParticipants = listOfUwpParticipants.Where(participant => participant != item).ToList();
+            
+            ViewList(listOfUwpParticipants);
             
             // kan inte uppdatera listvy här, då låser jag den för showlist(), är det därför jag ska ha en uppdateande klocka?   is funky...
-            name = "Fran";
-            tblockTest.Text = name;
+            
+            
         }
     }
 }
