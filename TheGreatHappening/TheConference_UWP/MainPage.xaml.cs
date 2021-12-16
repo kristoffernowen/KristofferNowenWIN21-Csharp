@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using TheConference_UWP.Services;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using Newtonsoft.Json;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -26,40 +27,26 @@ namespace TheConference_UWP
     public sealed partial class MainPage : Page
     {
         List<UwpParticipant> listOfUwpParticipants = new List<UwpParticipant>();
-        ObservableCollection<UwpParticipant> OBlista = new ObservableCollection<UwpParticipant>();
+        
         
 
         public MainPage()
         {
             this.InitializeComponent();
-          //  lvListOfParticipants.ItemsSource = OBlista;
+          
             
         }
 
-        private ObservableCollection<UwpParticipant> MyList
-        {
-            get
-            {
-                if (MyList == null)
-                {
-                    MyList = new ObservableCollection<UwpParticipant>();
-                }
-                return MyList;
-            }
-            set
-            {
-                MyList = value;
-            }
-        }
-        
-
-        
-        private  void ViewList(List<UwpParticipant> list)
+        private void ViewList(List<UwpParticipant> list)
         {
             listOfUwpParticipants = list.ToList();
-           
-            lvListOfParticipants.ItemsSource = list;
+
+            lvListOfParticipants.ItemsSource = listOfUwpParticipants;
         }
+
+
+
+
         private void btnSaveParticipantToList_Click(object sender, RoutedEventArgs e)
         {
 
@@ -75,23 +62,9 @@ namespace TheConference_UWP
             ViewList(listOfUwpParticipants);
         }
 
-        private void btnShowList_Click(object sender, RoutedEventArgs e)
-        {
-            // låser här också, den uppdaterar inte, första går bra
+        
 
-            
-            
-            
-
-            
-            
-        }
-
-        private void btnClearList_Click(object sender, RoutedEventArgs e)
-        {
-            listOfUwpParticipants.Clear();
-            lvListOfParticipants.ItemsSource = listOfUwpParticipants;
-        }
+        
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
@@ -105,9 +78,80 @@ namespace TheConference_UWP
             
             ViewList(listOfUwpParticipants);
             
-            // kan inte uppdatera listvy här, då låser jag den för showlist(), är det därför jag ska ha en uppdateande klocka?   is funky...
             
             
+        }
+
+        private async void btnSaveList_Click(object sender, RoutedEventArgs e)
+        {
+            await UwpParticipant.SaveList(listOfUwpParticipants);
+
+            
+        }
+    
+
+        private async void btnReadList_Click(object sender, RoutedEventArgs e)
+        {
+            // Den här borde förstås inte ligga här, men jag fick konvertingsproblem när jag flyttade den och kanske inte hinner lösa de innan uppgiftens huvudmoment är avklarade
+
+            var picker = new Windows.Storage.Pickers.FileOpenPicker();
+            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
+            picker.FileTypeFilter.Add(".txt");
+            
+
+            Windows.Storage.StorageFile pickedFile = await picker.PickSingleFileAsync();
+            if (pickedFile == null)
+                this.tblockDiscountCode.Text = "Operation cancelled.";
+
+
+            List<UwpParticipant> list = new List<UwpParticipant>();
+
+            
+
+            var data = await pickedFile.OpenReadAsync();
+            
+
+            using (StreamReader r = new StreamReader(data.AsStream()))
+            {
+                string text = r.ReadToEnd();
+                 list = JsonConvert.DeserializeObject<List<UwpParticipant>>(text);
+
+                
+            }
+           
+
+            
+
+            ViewList(list);
+
+        }
+
+        private void btnCreateDiscountCode_Click(object sender, RoutedEventArgs e)
+        {
+            var obj = (Button)sender;
+            var item = (UwpParticipant)obj.DataContext;
+
+
+            // listOfUwpParticipants = listOfUwpParticipants.Where(participant => participant == item).ToList();
+
+
+
+            //var indexHere = listOfUwpParticipants.IndexOf(item);
+            //string toString = Convert.ToString(indexHere);
+            //tblockDiscountCode.Text = toString;
+            item.DiscountCode = UwpParticipant.GenerateDiscountCode(item);
+
+           
+        }
+
+        private void btnShowDiscountCode_Click(object sender, RoutedEventArgs e)
+        {
+            var obj = (Button)sender;
+            var item = (UwpParticipant)obj.DataContext;
+
+            tblockDiscountCode.Text = $"{item.FullName}s rabattkod är {item.DiscountCode}.";
+
         }
     }
 }

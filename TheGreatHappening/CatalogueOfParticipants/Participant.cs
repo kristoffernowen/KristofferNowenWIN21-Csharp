@@ -122,7 +122,7 @@ namespace CatalogueOfParticipants
 
         public string WriteToTextFileAsJson(List<Participant> list)
         {
-            Console.WriteLine("Välj sökväg att spara filen. Använd existerande folder.");
+            Console.WriteLine("Skriv sökväg att spara filen. Använd existerande folder.");
             var pathOfHans = Console.ReadLine();
             string path = @"C:\TheGreatHappening\TGHjson.txt";
             
@@ -169,5 +169,6 @@ namespace CatalogueOfParticipants
 
             return list;    
         }
+        
     }
 }

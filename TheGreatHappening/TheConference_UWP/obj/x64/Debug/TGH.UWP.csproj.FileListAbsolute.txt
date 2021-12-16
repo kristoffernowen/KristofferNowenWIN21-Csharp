@@ -43,3 +43,4 @@ C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\TheConference_UW
 C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\TheConference_UWP\obj\x64\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\TheConference_UWP\obj\x64\Debug\ProjectArchitectures.txt
 C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\TheConference_UWP\obj\x64\Debug\.winmd_cache\$Microsoft.UI.Xaml.Markup.winmd_637424779200000000.json
+C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\TheConference_UWP\bin\x64\Debug\Newtonsoft.Json.dll
