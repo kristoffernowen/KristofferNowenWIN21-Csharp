@@ -31,19 +31,25 @@
                 <TextBlock Grid.Row="0" Text="Skapa deltagare" FontSize="40" Margin="0 20" />
                 <StackPanel Grid.Row="1" >
                     <TextBlock Text="Förnamn" FontSize="25" />
-                    <TextBox x:Name="tboxFirstName" PlaceholderText="Förnamn" FontSize="25" />
+                    <TextBox x:Name="tboxFirstName" PlaceholderText="Obligatoriskt" FontSize="25" />
                     <TextBlock Text="Efternamn" FontSize="25" />
-                    <TextBox x:Name="tboxLastName" PlaceholderText="Förnamn" FontSize="25" />
+                    <TextBox x:Name="tboxLastName" PlaceholderText="Obligatoriskt" FontSize="25" />
                     <TextBlock Text="Email" FontSize="25" />
-                    <TextBox x:Name="tboxEmail" PlaceholderText="Förnamn" FontSize="25" />
+                    <TextBox x:Name="tboxEmail" PlaceholderText="Obligatoriskt" FontSize="25" />
                     <TextBlock Text="Speciella önskemål" FontSize="25" />
-                    <TextBox x:Name="tboxSpecialRequirements" PlaceholderText="Speciella önskemål" FontSize="25" />
+                    <TextBox x:Name="tboxSpecialRequirements" PlaceholderText="Obligatoriskt" FontSize="25" />
+                    <TextBlock x:Name="tblockMessageLeft" />
                     <Button x:Name="btnSaveParticipantToList" Content="Lägg till i deltagarlista" Margin="10 50" HorizontalAlignment="Center" Click="btnSaveParticipantToList_Click"/>
 
                 </StackPanel>
             </Grid>
+            <Grid Grid.Column="1" Grid.Row="1" Background="CadetBlue">
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
             
-            <Grid Grid.Row="1" Grid.Column="1" Background="CadetBlue" Margin="10 0 0 0">
+            <Grid Grid.Row="0" Grid.Column="1" Background="CadetBlue" Margin="10 0 0 0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
@@ -53,40 +59,49 @@
                     <Button x:Name="btnSaveList" Content="Spara Deltagarlista" FontSize="20" Margin="10" HorizontalAlignment="Left" Click="btnSaveList_Click"/>
                     <Button x:Name="btnReadList" Content="Hämta Deltagarlista" FontSize="20" Margin="10" Click="btnReadList_Click"  />
                 </StackPanel>
-                
-                <ListView x:Name="lvListOfParticipants" DataContext="TheConference_UWP.Services.UwpParticipant" Grid.Row="1" >
+
+
+                <Grid Grid.Row="1" Padding="5" >
+                    <ScrollViewer Height="500" Width="auto"  VerticalScrollBarVisibility="Visible" >
+                        <ListView x:Name="lvListOfParticipants" DataContext="TheConference_UWP.Services.UwpParticipant" Grid.Row="1" >
                     <ListView.ItemTemplate >
                         <DataTemplate>
-                        <Grid Margin="0 5" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="auto" />
-                                
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Orientation="Vertical" Width="800" Background="Beige">
-                                 <TextBlock    Text="{Binding FullName}" FontSize="20" TextAlignment="Start"/>
-                                 <TextBlock  Text="{Binding Email}"  FontSize="20" TextAlignment="Start"/>
-                                    
-                             </StackPanel>
-                                <StackPanel Orientation="Vertical" Grid.Column="1" >
-                                    <Button x:Name="btnCreateDiscountCode" HorizontalContentAlignment="Right" Grid.Column="1"  Content="NY RABATTKOD" FontSize="12" Click="btnCreateDiscountCode_Click"/>
-                                    <Button x:Name="btnShowDiscountCode" HorizontalContentAlignment="Right" Grid.Column="1"  Content="VISA RABATTKOD" FontSize="12" Click="btnShowDiscountCode_Click" />
-                                </StackPanel>
-                                <StackPanel Grid.Column="2" Background="BlueViolet" Orientation="Horizontal">
-                           
-                                <Button x:Name="btnDelete" HorizontalContentAlignment="Right" Grid.Column="1" Margin="0 0 5 0" FontFamily="Segoe MDL2 Assets" Content="&#xE74D;" FontSize="40" Click="btnDelete_Click"/>
-                                
-                            </StackPanel>
-                        </Grid>
+                            
+                                    <Grid Margin="0 5"  >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+
+                                        </Grid.ColumnDefinitions>
+                                       
+                                        <StackPanel Grid.Column="0" Orientation="Vertical" Width="800" Background="Beige" >
+                                            <TextBlock    Text="{Binding FullName}" FontSize="20" TextAlignment="Start"/>
+                                            <TextBlock  Text="{Binding Email}"  FontSize="20" TextAlignment="Start"/>
+
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" Grid.Column="1" >
+
+                                            <Button x:Name="btnShowDiscountCode" HorizontalContentAlignment="Right" Grid.Column="1"  Content="VISA RABATTKOD" FontSize="12" Click="btnShowDiscountCode_Click" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="2" Background="BlueViolet" Orientation="Horizontal">
+
+                                            <Button x:Name="btnDelete" HorizontalContentAlignment="Right" Grid.Column="1" Margin="0 0 5 0" FontFamily="Segoe MDL2 Assets" Content="&#xE74D;" FontSize="40" Click="btnDelete_Click"/>
+
+                                        </StackPanel>
+                                    </Grid>
+                               
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                    </ScrollViewer>
+                </Grid>
                 <StackPanel Grid.Row="2">
                 
                     <TextBlock x:Name="tblockDiscountCode" Text="" FontSize="20" Margin="5"/>
                     
                 </StackPanel>
+            </Grid>
             </Grid>
         </Grid>
     </Grid>

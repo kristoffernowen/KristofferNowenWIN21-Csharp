@@ -51,13 +51,22 @@ namespace TheConference_UWP
         {
 
 
-            // OBlista
-            listOfUwpParticipants.Add(UwpParticipant.CreateParticipant(tboxFirstName.Text, tboxLastName.Text, tboxEmail.Text, tboxSpecialRequirements.Text));
 
-            //  listOfUwpParticipants = listOfUwpParticipants.Where(participant => participant == item).ToList();
+            //  listOfUwpParticipants.Add(UwpParticipant.CreateParticipant(tboxFirstName.Text, tboxLastName.Text, tboxEmail.Text, tboxSpecialRequirements.Text));
 
+            if (!string.IsNullOrEmpty(tboxFirstName.Text) && !string.IsNullOrEmpty(tboxLastName.Text) && !string.IsNullOrEmpty(tboxEmail.Text) && !string.IsNullOrEmpty(tboxSpecialRequirements.Text))
+            {
+                listOfUwpParticipants.Add(new UwpParticipant(tboxFirstName.Text, tboxLastName.Text, tboxEmail.Text, tboxSpecialRequirements.Text));
+                tboxFirstName.Text = "";
+                tboxLastName.Text = "";
+                tboxEmail.Text = "";
+                tboxSpecialRequirements.Text = "";
+            }
+            else
 
+                tblockMessageLeft.Text = "Deltagaren sparades inte, du måste fylla i alla fälten.";
 
+            
 
             ViewList(listOfUwpParticipants);
         }
@@ -72,7 +81,7 @@ namespace TheConference_UWP
             var obj =(Button)sender;
             var item =(UwpParticipant)obj.DataContext;
             
-            //OBlista.Remove(item);
+            
 
             listOfUwpParticipants = listOfUwpParticipants.Where(participant => participant != item).ToList();
             
@@ -84,8 +93,12 @@ namespace TheConference_UWP
 
         private async void btnSaveList_Click(object sender, RoutedEventArgs e)
         {
-            await UwpParticipant.SaveList(listOfUwpParticipants);
-
+            try
+            {
+                await UwpParticipant.SaveList(listOfUwpParticipants);
+            }
+            catch
+            { }
             
         }
     
@@ -93,56 +106,41 @@ namespace TheConference_UWP
         private async void btnReadList_Click(object sender, RoutedEventArgs e)
         {
             // Den här borde förstås inte ligga här, men jag fick konvertingsproblem när jag flyttade den och kanske inte hinner lösa de innan uppgiftens huvudmoment är avklarade
-
-            var picker = new Windows.Storage.Pickers.FileOpenPicker();
-            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
-            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
-            picker.FileTypeFilter.Add(".txt");
             
+                var picker = new Windows.Storage.Pickers.FileOpenPicker();
+                picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+                picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
+                picker.FileTypeFilter.Add(".txt");
 
-            Windows.Storage.StorageFile pickedFile = await picker.PickSingleFileAsync();
-            if (pickedFile == null)
-                this.tblockDiscountCode.Text = "Operation cancelled.";
+
+                Windows.Storage.StorageFile pickedFile = await picker.PickSingleFileAsync();
+                if (pickedFile == null)
+                    this.tblockDiscountCode.Text = "Operation cancelled.";
 
 
-            List<UwpParticipant> list = new List<UwpParticipant>();
+                List<UwpParticipant> list = new List<UwpParticipant>();
 
-            
 
-            var data = await pickedFile.OpenReadAsync();
-            
-
-            using (StreamReader r = new StreamReader(data.AsStream()))
+            if (pickedFile != null)
             {
-                string text = r.ReadToEnd();
-                 list = JsonConvert.DeserializeObject<List<UwpParticipant>>(text);
+                var data = await pickedFile.OpenReadAsync();
 
-                
+
+                using (StreamReader r = new StreamReader(data.AsStream()))
+                {
+                    string text = r.ReadToEnd();
+                    list = JsonConvert.DeserializeObject<List<UwpParticipant>>(text);
+
+
+                }
+
+
+
+
+
+                ViewList(list);
             }
-           
-
             
-
-            ViewList(list);
-
-        }
-
-        private void btnCreateDiscountCode_Click(object sender, RoutedEventArgs e)
-        {
-            var obj = (Button)sender;
-            var item = (UwpParticipant)obj.DataContext;
-
-
-            // listOfUwpParticipants = listOfUwpParticipants.Where(participant => participant == item).ToList();
-
-
-
-            //var indexHere = listOfUwpParticipants.IndexOf(item);
-            //string toString = Convert.ToString(indexHere);
-            //tblockDiscountCode.Text = toString;
-            item.DiscountCode = UwpParticipant.GenerateDiscountCode(item);
-
-           
         }
 
         private void btnShowDiscountCode_Click(object sender, RoutedEventArgs e)
