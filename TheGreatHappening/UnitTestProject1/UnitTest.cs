@@ -9,7 +9,7 @@ using System.Linq;
 namespace UnitTestProject1
 {
     /// <summary>
-    /// Test of DeleteParticipantFromList, UwpParticipant.FullName and SaveParticipantToList
+    /// Test of DeleteParticipantFromList, ChooseDiscountMessage and SaveParticipantToList 
     /// </summary>
 
     [TestClass]

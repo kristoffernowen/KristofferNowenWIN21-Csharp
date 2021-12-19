@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\UnitTestProject1\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2021-12-19T20:19:33.883</Modified>
+      <Modified>2021-12-19T21:45:33.872</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\UnitTestProject1\bin\x64\Debug\UnitTestProject1.exe">
       <PackagePath>entrypoint\UnitTestProject1.exe</PackagePath>
-      <Modified>2021-12-19T20:19:33.330</Modified>
+      <Modified>2021-12-19T21:45:33.063</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\TheConference_UWP\bin\x64\Debug\TheConference_UWP.exe">
       <PackagePath>TheConference_UWP.exe</PackagePath>
@@ -44,7 +44,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\UnitTestProject1\bin\x64\Debug\UnitTestProject1.pdb">
       <PackagePath>UnitTestProject1.pdb</PackagePath>
-      <Modified>2021-12-19T20:19:33.330</Modified>
+      <Modified>2021-12-19T21:45:33.063</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\TheConference_UWP\bin\x64\Debug\TheConference_UWP.pdb">
       <PackagePath>TheConference_UWP.pdb</PackagePath>
@@ -170,7 +170,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\UnitTestProject1\bin\x64\Debug\UnitTestApp.xbf">
       <PackagePath>UnitTestApp.xbf</PackagePath>
-      <Modified>2021-12-19T20:19:33.268</Modified>
+      <Modified>2021-12-19T21:45:32.971</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\TheConference_UWP\bin\x64\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
@@ -190,7 +190,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\krist\OneDrive\Documents\KN WIN21\C#\TheGreatHappening\UnitTestProject1\bin\x64\Debug\Core\UnitTestProject1.exe">
       <PackagePath>UnitTestProject1.exe</PackagePath>
-      <Modified>2021-12-19T20:19:33.879</Modified>
+      <Modified>2021-12-19T21:45:33.866</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
