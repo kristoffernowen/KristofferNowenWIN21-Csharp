@@ -25,7 +25,22 @@
       "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
       "DisplayName": "Miscellaneous Files",
       "ColorIndex": -1
+    },
+    "9ae23b15-bd34-4230-a0ca-eb3995bb0c78": {
+      "ProjectGuid": "9ae23b15-bd34-4230-a0ca-eb3995bb0c78",
+      "DisplayName": "TGH.Tests.xUnit",
+      "ColorIndex": 4
+    },
+    "5dd8fe0b-dde9-4423-8573-bb6a1007c071": {
+      "ProjectGuid": "5dd8fe0b-dde9-4423-8573-bb6a1007c071",
+      "DisplayName": "TGHUWP.Tests",
+      "ColorIndex": 5
+    },
+    "31a7db84-3530-40f7-a524-e292e514a81d": {
+      "ProjectGuid": "31a7db84-3530-40f7-a524-e292e514a81d",
+      "DisplayName": "UnitTestProject1",
+      "ColorIndex": 6
     }
   },
-  "NextColorIndex": 4
+  "NextColorIndex": 7
 }

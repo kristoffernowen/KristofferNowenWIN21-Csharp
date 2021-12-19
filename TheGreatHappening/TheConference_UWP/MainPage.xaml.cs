@@ -27,68 +27,60 @@ namespace TheConference_UWP
     public sealed partial class MainPage : Page
     {
         List<UwpParticipant> listOfUwpParticipants = new List<UwpParticipant>();
-        
-        
 
         public MainPage()
         {
             this.InitializeComponent();
-          
-            
         }
 
-        private void ViewList(List<UwpParticipant> list)
-        {
-            listOfUwpParticipants = list.ToList();
-
-            lvListOfParticipants.ItemsSource = listOfUwpParticipants;
-        }
-
-
-
+        
+        /// <summary>
+        /// Saves a participants data to a List<UwpParticipant
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void btnSaveParticipantToList_Click(object sender, RoutedEventArgs e)
         {
-
-
-
-            //  listOfUwpParticipants.Add(UwpParticipant.CreateParticipant(tboxFirstName.Text, tboxLastName.Text, tboxEmail.Text, tboxSpecialRequirements.Text));
-
-            if (!string.IsNullOrEmpty(tboxFirstName.Text) && !string.IsNullOrEmpty(tboxLastName.Text) && !string.IsNullOrEmpty(tboxEmail.Text) && !string.IsNullOrEmpty(tboxSpecialRequirements.Text))
+            if (!string.IsNullOrEmpty(tboxFirstName.Text) && !string.IsNullOrEmpty(tboxLastName.Text) &&
+                !string.IsNullOrEmpty(tboxEmail.Text) && !string.IsNullOrEmpty(tboxSpecialRequirements.Text))
             {
-                listOfUwpParticipants.Add(new UwpParticipant(tboxFirstName.Text, tboxLastName.Text, tboxEmail.Text, tboxSpecialRequirements.Text));
+                UwpParticipant.SaveParticipantToList(listOfUwpParticipants, new UwpParticipant(tboxFirstName.Text, tboxLastName.Text, tboxEmail.Text, tboxSpecialRequirements.Text));
+
                 tboxFirstName.Text = "";
                 tboxLastName.Text = "";
                 tboxEmail.Text = "";
                 tboxSpecialRequirements.Text = "";
+                tblockMessageLeft.Text = "";
             }
             else
-
                 tblockMessageLeft.Text = "Deltagaren sparades inte, du måste fylla i alla fälten.";
 
-            
-
-            ViewList(listOfUwpParticipants);
+            DisplayParticipantsList(listOfUwpParticipants);
         }
 
-        
 
-        
+        /// <summary>
+        /// Displays the participants in a List<UwpParticipants> in the xaml listview
+        /// </summary>
+        /// <param name="list">
+        /// </param>
+
+        private void DisplayParticipantsList(List<UwpParticipant> list)
+        {
+            listOfUwpParticipants = list.ToList();
+            lvListOfParticipants.ItemsSource = listOfUwpParticipants;
+            tblockDiscountCode.Text = "";
+        }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            
-            var obj =(Button)sender;
-            var item =(UwpParticipant)obj.DataContext;
-            
-            
+            var obj = (Button)sender;
+            var item = (UwpParticipant)obj.DataContext;
 
-            listOfUwpParticipants = listOfUwpParticipants.Where(participant => participant != item).ToList();
-            
-            ViewList(listOfUwpParticipants);
-            
-            
-            
+           listOfUwpParticipants = UwpParticipant.DeleteParticipantFromList(listOfUwpParticipants, item);
+
+            DisplayParticipantsList(listOfUwpParticipants);
         }
 
         private async void btnSaveList_Click(object sender, RoutedEventArgs e)
@@ -99,57 +91,49 @@ namespace TheConference_UWP
             }
             catch
             { }
-            
         }
-    
 
+
+        /// <summary>
+        /// Reads a list from a textfile
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void btnReadList_Click(object sender, RoutedEventArgs e)
         {
-            // Den här borde förstås inte ligga här, men jag fick konvertingsproblem när jag flyttade den och kanske inte hinner lösa de innan uppgiftens huvudmoment är avklarade
-            
-                var picker = new Windows.Storage.Pickers.FileOpenPicker();
-                picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
-                picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
-                picker.FileTypeFilter.Add(".txt");
-
-
-                Windows.Storage.StorageFile pickedFile = await picker.PickSingleFileAsync();
-                if (pickedFile == null)
-                    this.tblockDiscountCode.Text = "Operation cancelled.";
-
-
-                List<UwpParticipant> list = new List<UwpParticipant>();
-
+            var picker = new Windows.Storage.Pickers.FileOpenPicker();
+            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
+            picker.FileTypeFilter.Add(".txt");
+            Windows.Storage.StorageFile pickedFile = await picker.PickSingleFileAsync();
+            if (pickedFile == null)
+                this.tblockDiscountCode.Text = "Operation cancelled.";
 
             if (pickedFile != null)
             {
                 var data = await pickedFile.OpenReadAsync();
 
-
                 using (StreamReader r = new StreamReader(data.AsStream()))
                 {
                     string text = r.ReadToEnd();
-                    list = JsonConvert.DeserializeObject<List<UwpParticipant>>(text);
-
-
+                    listOfUwpParticipants = JsonConvert.DeserializeObject<List<UwpParticipant>>(text);
                 }
 
-
-
-
-
-                ViewList(list);
+                DisplayParticipantsList(listOfUwpParticipants);
             }
-            
         }
 
+        /// <summary>
+        /// Shows the discountcode of the participant
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnShowDiscountCode_Click(object sender, RoutedEventArgs e)
         {
             var obj = (Button)sender;
             var item = (UwpParticipant)obj.DataContext;
 
-            tblockDiscountCode.Text = $"{item.FullName}s rabattkod är {item.DiscountCode}.";
-
+            tblockDiscountCode.Text = UwpParticipant.ChooseDiscountMessage(item);
         }
     }
 }
